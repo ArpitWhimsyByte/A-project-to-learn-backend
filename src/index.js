@@ -1,9 +1,10 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express"
-
+import mongoose from "mongoose";
 import connectDB from "./db/index.js"
-
+import { DB_NAME } from "./constants.js";
+const app=express()
 connectDB()
 .then(()=>{
   app.listen(process.env.PORT|| 8000,()=>{
@@ -14,3 +15,19 @@ connectDB()
 .catch((error)=>{
 console.log("MONGO db connection failed")
 })
+//  const app=express()
+// ( async ()=>{
+//   try {
+//     await mongoose.connect(`${process.env.MONGODB_URI}${DB_NAME}`)
+//     app.on("error",(error)=>{
+//       console.log("ERROR talking to database")
+//       throw error
+//     })
+//     app.listen(process.env.PORT,()=>{
+//       console.log("Application is listeining");
+      
+//     })
+//   } catch (error) {
+//     console.error("ERROR : 404 Not found ")
+//   }
+// })()
